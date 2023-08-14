@@ -15,7 +15,7 @@ public class RequestSendButton extends BaseButton {
     }
 
     @Override
-    public void onClick(final Player player) {
+    public void update(Player player) {
         final Settings settings = settingManager.getSafely(player);
         final Player target = Bukkit.getPlayer(settings.getTarget());
 
@@ -41,6 +41,25 @@ public class RequestSendButton extends BaseButton {
                 "bet_amount", settings.getBet()
         );
         setLore(lore.split("\n"));
+    }
+
+    @Override
+    public void onClick(final Player player) {
+        final Settings settings = settingManager.getSafely(player);
+        final Player target = Bukkit.getPlayer(settings.getTarget());
+
+        if (settings.getTarget() == null) {
+            settings.reset();
+            player.closeInventory();
+            return;
+        }
+
+        if (target == null) {
+            settings.reset();
+            player.closeInventory();
+            lang.sendMessage(player, "ERROR.player.no-longer-online");
+            return;
+        }
 
         if (!settings.isOwnInventory() && settings.getKit() == null) {
             player.closeInventory();

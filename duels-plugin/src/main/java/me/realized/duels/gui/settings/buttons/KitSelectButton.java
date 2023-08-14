@@ -34,6 +34,11 @@ public class KitSelectButton extends BaseButton {
             return;
         }
 
+        final Settings settings = settingManager.getSafely(player);
+        if (settings != null) {
+            settings.updateGui(player);
+        }
+
         kitManager.getGui().open(player);
     }
 }

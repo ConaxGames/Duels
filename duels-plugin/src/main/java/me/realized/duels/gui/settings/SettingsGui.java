@@ -11,7 +11,7 @@ public class SettingsGui extends SinglePageGui<DuelsPlugin> {
         super(plugin, plugin.getLang().getMessage("GUI.settings.title"), 3);
         final Config config = plugin.getConfiguration();
 
-        set(13, new RequestDetailsButton(plugin));
+//        set(13, new RequestDetailsButton(plugin));
 
         if (config.isKitSelectingEnabled()) {
             set(10, new KitSelectButton(plugin));
@@ -26,7 +26,8 @@ public class SettingsGui extends SinglePageGui<DuelsPlugin> {
         }
 
         set(16, new RequestSendButton(plugin));
-//        set(7, new CancelButton(plugin));
+
+        // set(7, new CancelButton(plugin));
     }
 }
 

@@ -5,6 +5,7 @@ import me.realized.duels.Permissions;
 import me.realized.duels.gui.BaseButton;
 import me.realized.duels.setting.Settings;
 import me.realized.duels.util.inventory.ItemBuilder;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
