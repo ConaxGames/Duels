@@ -270,7 +270,7 @@ public class BettingGui extends AbstractGui<DuelsPlugin> {
                 if (CompatUtil.isPre1_13()) {
                     item.setDurability((short) 5);
                 } else {
-                    final ItemStack greenPane = Items.GREEN_PANE.clone();
+                    final ItemStack greenPane = Items.GREEN_DYE.clone();
                     greenPane.setItemMeta(item.getItemMeta());
                     item = greenPane;
                 }

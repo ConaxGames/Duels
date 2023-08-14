@@ -29,6 +29,8 @@ public final class Items {
     public static final ItemStack WATER_BREATHING_POTION;
     public static final ItemStack ENCHANTED_GOLDEN_APPLE;
 
+    public static final ItemStack GREEN_DYE;
+
     static {
         ORANGE_PANE = (CompatUtil.isPre1_13() ? ItemBuilder.of(PANE, 1, (short) 1) : ItemBuilder.of(Material.ORANGE_STAINED_GLASS_PANE)).name(" ").build();
         BLUE_PANE = (CompatUtil.isPre1_13() ? ItemBuilder.of(PANE, 1, (short) 11) : ItemBuilder.of(Material.BLUE_STAINED_GLASS_PANE)).name(" ").build();
@@ -49,6 +51,7 @@ public final class Items {
             PotionType.WATER_BREATHING, false, false)).build();
         ENCHANTED_GOLDEN_APPLE = CompatUtil.isPre1_13() ?
             ItemBuilder.of(Material.GOLDEN_APPLE, 1, (short) 1).build() : ItemBuilder.of(Material.ENCHANTED_GOLDEN_APPLE).build();
+        GREEN_DYE = ItemBuilder.of(Material.LIME_DYE).name(" ").build();
     }
 
     public static boolean equals(final ItemStack item, final ItemStack other) {
