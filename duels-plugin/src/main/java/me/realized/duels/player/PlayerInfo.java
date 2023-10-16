@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import lombok.Getter;
 import lombok.Setter;
 import me.realized.duels.util.PlayerUtil;
@@ -25,20 +26,23 @@ public class PlayerInfo {
     @Getter
     private final int hunger;
     @Getter
+    private final float experience;
+    @Getter
     private final List<ItemStack> extra = new ArrayList<>();
     @Getter
     @Setter
     private Location location;
 
-    public PlayerInfo(final List<PotionEffect> effects, final double health, final int hunger, final Location location) {
+    public PlayerInfo(final List<PotionEffect> effects, final double health, final int hunger, final float experience, final Location location) {
         this.effects = effects;
         this.health = health;
         this.hunger = hunger;
+        this.experience = experience;
         this.location = location;
     }
 
     public PlayerInfo(final Player player, final boolean excludeInventory) {
-        this(Lists.newArrayList(player.getActivePotionEffects()), player.getHealth(), player.getFoodLevel(), player.getLocation().clone());
+        this(Lists.newArrayList(player.getActivePotionEffects()), player.getHealth(), player.getFoodLevel(), player.getExp(), player.getLocation().clone());
 
         if (excludeInventory) {
             return;
@@ -52,6 +56,7 @@ public class PlayerInfo {
         player.addPotionEffects(effects);
         player.setHealth(health > maxHealth ? maxHealth : health);
         player.setFoodLevel(hunger);
+        player.setExp(this.experience);
         InventoryUtil.fillFromMap(player.getInventory(), items);
         InventoryUtil.addOrDrop(player, extra);
         player.updateInventory();

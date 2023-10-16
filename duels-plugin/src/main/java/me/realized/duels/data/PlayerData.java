@@ -23,6 +23,7 @@ public class PlayerData {
     private Collection<PotionEffectData> effects = new ArrayList<>();
     private double health;
     private int hunger;
+    private float experience;
     private LocationData location;
     private List<ItemData> extra = new ArrayList<>();
 
@@ -31,6 +32,7 @@ public class PlayerData {
     private PlayerData(final PlayerInfo info) {
         this.health = info.getHealth();
         this.hunger = info.getHunger();
+        this.experience = info.getExperience();
         this.location = LocationData.fromLocation(info.getLocation());
 
         for (final Map.Entry<String, Map<Integer, ItemStack>> entry : info.getItems().entrySet()) {
@@ -50,6 +52,7 @@ public class PlayerData {
             effects.stream().map(PotionEffectData::toPotionEffect).filter(Objects::nonNull).collect(Collectors.toList()),
             health,
             hunger,
+            experience,
             location.toLocation()
         );
 
