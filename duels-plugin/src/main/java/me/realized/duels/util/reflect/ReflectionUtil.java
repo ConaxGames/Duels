@@ -15,7 +15,15 @@ public final class ReflectionUtil {
     static {
         final String packageName = Bukkit.getServer().getClass().getPackage().getName();
         PACKAGE_VERSION = packageName.substring(packageName.lastIndexOf('.') + 1);
-        MAJOR_VERSION = NumberUtil.parseInt(PACKAGE_VERSION.split("_")[1]).orElse(0);
+        int majorVersion = 0;
+
+        // Check that PACKAGE_VERSION contains an underscore and a numeric version part
+        String[] versionParts = PACKAGE_VERSION.split("_");
+        if (versionParts.length > 1) {
+            majorVersion = NumberUtil.parseInt(versionParts[1]).orElse(0);
+        }
+
+        MAJOR_VERSION = majorVersion;
     }
 
     public static int getMajorVersion() {
