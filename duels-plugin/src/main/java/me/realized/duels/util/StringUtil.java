@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 import me.realized.duels.util.reflect.ReflectionUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 
@@ -82,7 +83,7 @@ public final class StringUtil {
         if (COMMONS_LANG3) {
             return org.apache.commons.lang3.StringUtils.join(array, separator, startIndex, endIndex);
         } else {
-            return org.apache.commons.lang.StringUtils.join(array, separator, startIndex, endIndex);
+            return StringUtils.join(array, separator, startIndex, endIndex);
         }
     }
 
@@ -90,7 +91,7 @@ public final class StringUtil {
         if (COMMONS_LANG3) {
             return org.apache.commons.lang3.StringUtils.join(collection, separator);
         } else {
-            return org.apache.commons.lang.StringUtils.join(collection, separator);
+            return StringUtils.join(collection, separator);
         }
     }
 
@@ -98,7 +99,7 @@ public final class StringUtil {
         if (COMMONS_LANG3) {
             return org.apache.commons.lang3.StringUtils.capitalize(s);
         } else {
-            return org.apache.commons.lang.StringUtils.capitalize(s);
+            return StringUtils.capitalize(s);
         }
     }
 
@@ -106,7 +107,7 @@ public final class StringUtil {
         if (COMMONS_LANG3) {
             return org.apache.commons.lang3.StringUtils.containsIgnoreCase(str, searchStr);
         } else {
-            return org.apache.commons.lang.StringUtils.containsIgnoreCase(str, searchStr);
+            return StringUtils.containsIgnoreCase(str, searchStr);
         }
     }
 }

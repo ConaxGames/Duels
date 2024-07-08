@@ -177,7 +177,7 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
         if (CompatUtil.hasSetCollidable()) {
             player.setCollidable(false);
         } else {
-            player.spigot().setCollidesWithEntities(false);
+            player.setCollidable(false);
         }
 
         if (config.isSpecAddInvisibilityEffect()) {
@@ -209,7 +209,7 @@ public class SpectateManagerImpl implements Loadable, SpectateManager {
         if (CompatUtil.hasSetCollidable()) {
             player.setCollidable(true);
         } else {
-            player.spigot().setCollidesWithEntities(true);
+            player.setCollidable(true);
         }
 
         final PlayerInfo info = playerManager.remove(player);
