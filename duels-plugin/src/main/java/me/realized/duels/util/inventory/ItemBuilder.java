@@ -6,7 +6,6 @@ import java.util.UUID;
 import java.util.function.Consumer;
 import me.realized.duels.util.EnumUtil;
 import me.realized.duels.util.StringUtil;
-import me.realized.duels.util.compat.CompatUtil;
 import me.realized.duels.util.compat.Items;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
@@ -28,6 +27,10 @@ public final class ItemBuilder {
     private final ItemStack result;
 
     private ItemBuilder(final Material type, final int amount, final short durability) {
+        if (type == null) {
+            throw new IllegalArgumentException("Material cannot be null");
+        }
+
         this.result = new ItemStack(type, amount);
         Items.setDurability(result, durability);
     }
@@ -49,11 +52,18 @@ public final class ItemBuilder {
     }
 
     public static ItemBuilder of(final Material type, final int amount, final short durability) {
+        if (type == null) {
+            throw new IllegalArgumentException("Material cannot be null");
+        }
         return new ItemBuilder(type, amount, durability);
     }
 
     public static ItemBuilder of(final String type, final int amount, final short durability) {
-        return new ItemBuilder(type, amount, durability);
+        Material material = Material.matchMaterial(type);
+        if (material == null) {
+            throw new IllegalArgumentException("Material type " + type + " is not valid");
+        }
+        return new ItemBuilder(material, amount, durability);
     }
 
     public static ItemBuilder of(final ItemStack item) {
@@ -86,11 +96,7 @@ public final class ItemBuilder {
 
     public ItemBuilder unbreakable() {
         return editMeta(meta -> {
-            if (CompatUtil.isPre1_12()) {
-                meta.setUnbreakable(true);
-            } else {
-                meta.setUnbreakable(true);
-            }
+            meta.setUnbreakable(true);
         });
     }
 
@@ -106,7 +112,6 @@ public final class ItemBuilder {
     public ItemBuilder leatherArmorColor(final String color) {
         return editMeta(meta -> {
             final LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) meta;
-
             if (color != null) {
                 leatherArmorMeta.setColor(DyeColor.valueOf(color).getColor());
             }
@@ -123,25 +128,19 @@ public final class ItemBuilder {
     public ItemBuilder attribute(final String name, final int operation, final double amount, final String slotName) {
         return editMeta(meta -> {
             final Attribute attribute = EnumUtil.getByName(attributeNameToEnum(name), Attribute.class);
-
             if (attribute == null) {
                 return;
             }
-
             final AttributeModifier modifier;
-
             if (slotName != null) {
                 final EquipmentSlot slot = EnumUtil.getByName(slotName, EquipmentSlot.class);
-
                 if (slot == null) {
                     return;
                 }
-
                 modifier = new AttributeModifier(UUID.randomUUID(), name, amount, Operation.values()[operation], slot);
             } else {
                 modifier = new AttributeModifier(UUID.randomUUID(), name, amount, Operation.values()[operation]);
             }
-
             meta.addAttributeModifier(attribute, modifier);
         });
     }
@@ -149,18 +148,15 @@ public final class ItemBuilder {
     private String attributeNameToEnum(String name) {
         int len = name.length();
         int capitalLetterIndex = -1;
-
         for (int i = 0; i < len; i++) {
             if (Character.isUpperCase(name.charAt(i))) {
                 capitalLetterIndex = i;
                 break;
             }
         }
-
         if (capitalLetterIndex != -1) {
             name = name.substring(0, capitalLetterIndex) + "_" + name.substring(capitalLetterIndex);
         }
-
         return name.replace(".", "_").toUpperCase();
     }
 
