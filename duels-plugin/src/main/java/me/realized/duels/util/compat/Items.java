@@ -10,7 +10,7 @@ import org.bukkit.potion.PotionType;
 
 public final class Items {
 
-    private static final String PANE = "STAINED_GLASS_PANE";
+    private static final String PANE = "LEGACY_STAINED_GLASS_PANE";
 
     public static final ItemStack ORANGE_PANE;
     public static final ItemStack BLUE_PANE;
