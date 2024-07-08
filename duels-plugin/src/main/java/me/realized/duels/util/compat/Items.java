@@ -38,13 +38,13 @@ public final class Items {
         GRAY_PANE = (CompatUtil.isPre1_13() ? ItemBuilder.of(PANE, 1, (short) 7) : ItemBuilder.of(Material.GRAY_STAINED_GLASS_PANE)).name(" ").build();
         WHITE_PANE = (CompatUtil.isPre1_13() ? ItemBuilder.of(PANE, 1, (short) 0) : ItemBuilder.of(Material.WHITE_STAINED_GLASS_PANE)).name(" ").build();
         GREEN_PANE = (CompatUtil.isPre1_13() ? ItemBuilder.of(PANE, 1, (short) 5) : ItemBuilder.of(Material.LIME_STAINED_GLASS_PANE)).build();
-        HEAD = (CompatUtil.isPre1_13() ? ItemBuilder.of("SKULL_ITEM", 1, (short) 3) : ItemBuilder.of(Material.PLAYER_HEAD)).build();
-        SKELETON_HEAD = CompatUtil.isPre1_13() ? Material.matchMaterial("SKULL_ITEM") : Material.SKELETON_SKULL;
-        OFF = (CompatUtil.isPre1_13() ? ItemBuilder.of("INK_SACK", 1, (short) 8) : ItemBuilder.of(Material.GRAY_DYE)).build();
-        ON = (CompatUtil.isPre1_13() ? ItemBuilder.of("INK_SACK", 1, (short) 10) : ItemBuilder.of(Material.LIME_DYE)).build();
-        MUSHROOM_SOUP = CompatUtil.isPre1_13() ? Material.matchMaterial("MUSHROOM_SOUP") : Material.MUSHROOM_STEW;
-        EMPTY_MAP = CompatUtil.isPre1_13() ? Material.matchMaterial("EMPTY_MAP") : Material.MAP;
-        SIGN = CompatUtil.isPre1_14() ? Material.matchMaterial("SIGN") : Material.OAK_SIGN;
+        HEAD = (CompatUtil.isPre1_13() ? ItemBuilder.of("PLAYER_HEAD", 1, (short) 3) : ItemBuilder.of(Material.PLAYER_HEAD)).build();
+        SKELETON_HEAD = CompatUtil.isPre1_13() ? Material.matchMaterial("PLAYER_HEAD") : Material.SKELETON_SKULL;
+        OFF = (CompatUtil.isPre1_13() ? ItemBuilder.of("GRAY_DYE", 1, (short) 8) : ItemBuilder.of(Material.GRAY_DYE)).build();
+        ON = (CompatUtil.isPre1_13() ? ItemBuilder.of("LIME_DYE", 1, (short) 10) : ItemBuilder.of(Material.LIME_DYE)).build();
+        MUSHROOM_SOUP = CompatUtil.isPre1_13() ? Material.matchMaterial("MUSHROOM_STEW") : Material.MUSHROOM_STEW;
+        EMPTY_MAP = CompatUtil.isPre1_13() ? Material.matchMaterial("MAP") : Material.MAP;
+        SIGN = CompatUtil.isPre1_14() ? Material.matchMaterial("OAK_SIGN") : Material.OAK_SIGN;
         HEAL_SPLASH_POTION = (CompatUtil.isPre1_9() ? ItemBuilder.of(Material.POTION, 1, (short) 16421) : ItemBuilder.of(Material.SPLASH_POTION).potion(
             PotionType.HEALING, false, true)).build();
         WATER_BREATHING_POTION = (CompatUtil.isPre1_9() ? ItemBuilder.of(Material.POTION, 1, (short) 8237) : ItemBuilder.of(Material.POTION).potion(
@@ -59,7 +59,7 @@ public final class Items {
     }
 
     public static ItemStack from(final String type, final short data) {
-        if (type.equalsIgnoreCase("STAINED_GLASS_PANE") && !CompatUtil.isPre1_13()) {
+        if (type.equalsIgnoreCase("LEGACY_STAINED_GLASS_PANE") && !CompatUtil.isPre1_13()) {
             return ItemBuilder.of(Panes.from(data)).name(" ").build();
         }
 
