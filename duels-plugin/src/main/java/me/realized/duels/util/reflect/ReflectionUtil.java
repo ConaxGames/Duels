@@ -14,7 +14,15 @@ public final class ReflectionUtil {
 
     static {
         final String packageName = Bukkit.getServer().getClass().getPackage().getName();
-        PACKAGE_VERSION = packageName.substring(packageName.lastIndexOf('.') + 1);
+        String packageVersion = packageName.substring(packageName.lastIndexOf('.') + 1);
+
+        if (!packageVersion.startsWith("v"))
+            packageVersion = "v" + Bukkit.getServer().getBukkitVersion()
+                    .replace(".", "_")
+                    .replace("-R0_", "_R")
+                    .replace("-SNAPSHOT", "");
+
+        PACKAGE_VERSION = packageVersion;
         MAJOR_VERSION = NumberUtil.parseInt(PACKAGE_VERSION.split("_")[1]).orElse(0);
     }
 
